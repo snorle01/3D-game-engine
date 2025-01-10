@@ -1,5 +1,5 @@
 from typing import List, TYPE_CHECKING
-from model import base_model
+from engine.model import base_model
 if TYPE_CHECKING:
     from engine import engine_class
 

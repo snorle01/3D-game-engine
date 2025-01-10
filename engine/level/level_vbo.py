@@ -1,6 +1,6 @@
 import numpy
 from engine.vbo import base_VBO
-from level import level
+from engine.level import level
 from typing import List
 
 class level_VBO(base_VBO):

@@ -1,11 +1,11 @@
 import moderngl
 import glm
 import math
-from vbo import *
+from engine.vbo import *
+from engine.level import level
 from typing import TYPE_CHECKING
-from level import level
 
-from level.level_vbo import level_VBO
+from engine.level.level_vbo import level_VBO
 
 if TYPE_CHECKING:
     from engine import engine_class
