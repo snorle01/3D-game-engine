@@ -1,14 +1,14 @@
 import moderngl
 import glm
 import math
-from engine.vbo import *
+from vbo import *
 from typing import TYPE_CHECKING
 from level import level
 
 from level.level_vbo import level_VBO
 
 if TYPE_CHECKING:
-    from engine.engine import engine_class
+    from engine import engine_class
 
 class base_model:
     def __init__(self, engine):

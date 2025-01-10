@@ -1,5 +1,5 @@
-from engine.vbo import VBOs_class, base_VBO
-from engine.shader import shader_programs
+from vbo import VBOs_class, base_VBO
+from shader import shader_programs
 from typing import Dict
 import moderngl
 

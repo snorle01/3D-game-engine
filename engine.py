@@ -1,8 +1,8 @@
 import pygame, moderngl
-from engine.vao import VAOs_class
-from engine.texture import texture_class
-from engine.camera import camera_class
-from engine.scene import base_scene
+from vao import VAOs_class
+from texture import texture_class
+from camera import camera_class
+from scene import base_scene
 
 class engine_class:
     def __init__(self, scene, icon = None):

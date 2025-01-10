@@ -1,7 +1,7 @@
 from typing import List, TYPE_CHECKING
-from engine.model import base_model
+from model import base_model
 if TYPE_CHECKING:
-    from engine.engine import engine_class
+    from engine import engine_class
 
 class base_scene:
     def __init__(self, engine):
