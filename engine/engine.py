@@ -1,5 +1,5 @@
 import pygame, moderngl
-from vao import VAOs_class
+from engine.vao import VAOs_class
 from engine.texture import texture_class
 from engine.camera import camera_class
 from engine.scene import base_scene
