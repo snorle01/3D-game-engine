@@ -52,7 +52,7 @@ class world_model(base_model):
         super().render()
 
 class texture_model(world_model):
-    def __init__(self, engine: engine_class, texture_name: str, pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
+    def __init__(self, engine, texture_name: str, pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
         super().__init__(engine, pos, rot, scale)
         self.texture = self.engine.texture.get_texture(texture_name)
         self.get_VAO(texture_VBO(self.engine.ctx), "texture", "texture")
@@ -63,7 +63,7 @@ class texture_model(world_model):
         super().render()
 
 class level(world_model):
-    def __init__(self, engine: engine_class, level_data:level, texture_name: str, pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
+    def __init__(self, engine, level_data:level, texture_name: str, pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
         super().__init__(engine, pos, rot, scale)
         self.texture = self.engine.texture.get_texture(texture_name)
         self.get_VAO(level_VBO(self.engine.ctx, level_data), "texture", "level")
