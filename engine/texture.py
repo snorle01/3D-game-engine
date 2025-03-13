@@ -7,6 +7,24 @@ class texture_class:
         self.ctx: moderngl.Context = self.engine.ctx
         self.textures: Dict[str, moderngl.Texture] = {}
 
+        # make error texture
+        surface = pygame.Surface((64, 64))
+        surface.fill((255, 0, 255))
+        for y in range(4):
+            for x in range(2):
+                x_pos = x * 32
+                if y % 2:
+                    x_pos += 16
+                pygame.draw.rect(surface, (0, 0, 0), (x_pos, y * 16, 16, 16))
+
+        # turn it into openGL texture
+        self.error = self.ctx.texture(size=surface.get_size(), components=3, data=pygame.image.tostring(surface, "RGB"))
+        # mipmaps
+        self.error.filter = (moderngl.LINEAR_MIPMAP_LINEAR, moderngl.LINEAR)
+        self.error.build_mipmaps()
+        self.error.anisotropy = 32.0
+
+
     # default texture
     def load_texture(self, texture_name: str, path: str):
         texture = pygame.image.load(path).convert()
@@ -23,4 +41,8 @@ class texture_class:
         [tex.release() for tex in self.textures.values()]
 
     def get_texture(self, texture_name: str) -> moderngl.Texture:
-        return self.textures[texture_name]
+        if texture_name in self.textures:
+            return self.textures[texture_name]
+        else:
+            print("FAILED TO FIND TEXTURE")
+            return self.error
