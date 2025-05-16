@@ -24,12 +24,23 @@ class texture_class:
         self.error.build_mipmaps()
         self.error.anisotropy = 32.0
 
-
     # default texture
     def load_texture(self, texture_name: str, path: str):
         texture = pygame.image.load(path).convert()
         texture = pygame.transform.flip(texture, flip_x=False, flip_y=True)
         texture = self.ctx.texture(size=texture.get_size(), components=3, data=pygame.image.tostring(texture, "RGB"))
+        # mipmaps
+        texture.filter = (moderngl.LINEAR_MIPMAP_LINEAR, moderngl.LINEAR)
+        texture.build_mipmaps()
+        texture.anisotropy = 32.0
+        
+        self.textures[texture_name] = texture
+
+    # transparent texture
+    def load_texture_alpha(self, texture_name: str, path: str):
+        texture = pygame.image.load(path).convert_alpha()
+        texture = pygame.transform.flip(texture, flip_x=False, flip_y=True)
+        texture = self.ctx.texture(size=texture.get_size(), components=4, data=pygame.image.tostring(texture, "RGBA"))
         # mipmaps
         texture.filter = (moderngl.LINEAR_MIPMAP_LINEAR, moderngl.LINEAR)
         texture.build_mipmaps()
