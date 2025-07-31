@@ -34,5 +34,5 @@ class engine_class:
         self.clear_color = ((0, 1, 0.75))
 
     def destroy(self):
-        self.VAO.destroy
+        self.VAO.destroy()
         self.texture.destroy()
