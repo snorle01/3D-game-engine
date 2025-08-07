@@ -82,3 +82,64 @@ class level_class:
                 break
 
         return path_dict
+    
+    def get_lighting(self):
+        max_light = 0.5
+        min_light = 0.1
+        light_falloff = 0.1
+        ceiling_data = self.ceiling
+
+        light_data = []
+
+        # flip and fil light data
+        for index in range(len(ceiling_data)):
+            light = 1 - ceiling_data[index]
+
+            if light > max_light:
+                light = max_light
+
+            if light < min_light:
+                light = min_light
+
+            light_data.append(light)
+
+        # blurr light
+        target = max_light
+        while target - light_falloff > min_light:
+            for index in range(len(light_data)):
+                light = light_data[index]
+                if light == target and self.wall[index] != 1:
+
+                    target_x = self.index_to_X(index)
+                    target_y = self.index_to_Y(index)
+
+                    def blurr_light(pos:tuple[int, int]):
+                        light_check_index = self.XY_to_index(pos)
+                        light_check = light_data[light_check_index]
+                        if self.wall[light_check_index] == 0 and light_check < target:
+                            light_data[light_check_index] = target - light_falloff
+
+                    # directions
+                    x = target_x - 1
+                    y = target_y
+                    if x > -1:
+                        blurr_light((x, y))
+
+                    x = target_x + 1
+                    y = target_y
+                    if x < self.size[0]:
+                        blurr_light((x, y))
+
+                    x = target_x
+                    y = target_y - 1
+                    if y > -1:
+                        blurr_light((x, y))
+
+                    x = target_x
+                    y = target_y + 1
+                    if y < self.size[1]:
+                        blurr_light((x, y))
+            target -= light_falloff
+
+        print(light_data)
+        return light_data
